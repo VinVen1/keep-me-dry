@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+/* Weather images from https://www.flaticon.com/search?style_id=136&author_id=1&word=weather&type=standard */
+@font-face {
+  font-family: Nunito;
+  src: url("assets/fonts/Nunito-VariableFont_wght.ttf");
+  font-weight: auto;
+  font-style: auto;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("assets/fonts/Nunito-Italic-VariableFont_wght.ttf");
+  font-weight: auto;
+  font-style: italic;
+}
+
+html {
+  padding: 0;
+  background: #87ceeb;
+  color: #2C2D2D;
+  font-family: "Nunito", serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+.vertical-divider{
+  height: 40px;
+  border: solid 1px #000;
+  flex-shrink: 3;
+  margin: auto 20px;
+}
