@@ -25,9 +25,21 @@ h1,h2,h3,h4,h5,h6 {
   margin: 0;
 }
 
-.vertical-divider{
-  height: 40px;
-  border: solid 1px #000;
-  flex-shrink: 3;
-  margin: auto 20px;
+h2 {
+  font-size: 48px;
+}
+
+.info-element {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 15px;
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .info {
+    font-size: 28px
+  }
 }
