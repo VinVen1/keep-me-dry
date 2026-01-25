@@ -1,7 +1,5 @@
-<div class="card">
-
+<app-card>
   <div class="main-info">
-
     <div class="right">
       <h2 class="city">{{ 'Napoli' }}</h2>
       <div class="additional-info">
@@ -10,11 +8,20 @@
           <span class="info">23°</span>
         </div>
 
-        <span class="vertical-divider"></span>
-
         <div class="info-element">
           <span class="title">Umidità</span>
           <span class="info">43%</span>
+        </div>
+      </div>
+      <div class="additional-info">
+        <div class="info-element">
+          <span class="title">Vento</span>
+          <span class="info">30 Km/h</span>
+        </div>
+
+        <div class="info-element">
+          <span class="title">Indice UV</span>
+          <span class="info">1</span>
         </div>
       </div>
     </div>
@@ -22,13 +29,12 @@
     <div>
       <div class="weather">
         <div class="weather-img">
-          <img ngSrc="assets/img/weather/storm.png" fill alt="Pioggia">
+          <img ngSrc="assets/img/weather/storm.png" [priority]="0" fill alt="Pioggia">
         </div>
         <span class="main-temp">23°</span>
       </div>
     </div>
-
   </div>
+</app-card>
 
 
-</div>

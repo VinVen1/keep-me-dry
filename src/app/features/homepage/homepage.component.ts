@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {WeatherInfo} from './components/weather-info/weather-info';
+import {CurrentWeatherComponent} from './components/current-weather/current-weather.component';
+import {HourlyWeatherComponent} from './components/hourly-weather/hourly-weather.component';
 
 @Component({
   selector: 'app-homepage',
   imports: [
-    WeatherInfo
+    CurrentWeatherComponent,
+    HourlyWeatherComponent
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
