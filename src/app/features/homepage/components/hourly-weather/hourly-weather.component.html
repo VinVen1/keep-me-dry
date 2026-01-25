@@ -1,39 +1,102 @@
 <app-card>
   <div class="hourly-info">
-    <h2>Giornaliero</h2>
 
     <div class="header">
-      <div class="info-element">
-        <span class="title">Minima</span>
-        <span class="info">15°</span>
-      </div>
-      <div class="info-element">
-        <span class="title">Massima</span>
-        <span class="info">25°</span>
+      <h2>Giornaliero</h2>
+
+      <div class="min-max">
+        <div class="info-element">
+          <span class="title">Minima</span>
+          <span class="info">15°</span>
+        </div>
+        <div class="info-element">
+          <span class="title">Massima</span>
+          <span class="info">25°</span>
+        </div>
       </div>
     </div>
 
-    <table class="hourly-table">
-      <tr>
-        <th>Ora</th>
-        <th>Condizioni</th>
-        <th></th>
-        <th>Temperatura</th>
-        <th>Precipitazioni</th>
-        <th>Umidità</th>
-      </tr>
-      <tr>
-        <td>{{ '15:00'  }}</td>
-        <td>
-          <div class="img-cell">
-            <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
-          </div>
-        </td>
-        <td>Pioggia</td>
-        <td>17°</td>
-        <td>1.1 mm</td>
-        <td>77%</td>
-      </tr>
-    </table>
+    <div class="hourly-table">
+      <table >
+        <tr>
+          <th>Ora</th>
+          <th>Condizioni</th>
+          <th>Temperatura</th>
+          <th>Precipitazioni</th>
+          <th>Umidità</th>
+        </tr>
+        <tr>
+          <td>{{ '15:00'  }}</td>
+          <td>
+            <div class="weather-cell">
+              <div class="img-cell">
+                <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
+              </div>
+              Pioggia
+            </div>
+          </td>
+          <td>17°</td>
+          <td>1.1 mm</td>
+          <td>77%</td>
+        </tr>
+        <tr>
+          <td>{{ '15:00'  }}</td>
+          <td>
+            <div class="weather-cell">
+              <div class="img-cell">
+                <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
+              </div>
+              Pioggia
+            </div>
+          </td>
+          <td>17°</td>
+          <td>1.1 mm</td>
+          <td>77%</td>
+        </tr>
+        <tr>
+          <td>{{ '15:00'  }}</td>
+          <td>
+            <div class="weather-cell">
+              <div class="img-cell">
+                <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
+              </div>
+              Pioggia
+            </div>
+          </td>
+          <td>17°</td>
+          <td>1.1 mm</td>
+          <td>77%</td>
+        </tr>
+        <tr>
+          <td>{{ '15:00'  }}</td>
+          <td>
+            <div class="weather-cell">
+              <div class="img-cell">
+                <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
+              </div>
+              Pioggia
+            </div>
+          </td>
+          <td>17°</td>
+          <td>1.1 mm</td>
+          <td>77%</td>
+        </tr>
+        <tr>
+          <td>{{ '15:00'  }}</td>
+          <td>
+            <div class="weather-cell">
+              <div class="img-cell">
+                <img [ngSrc]="'assets/img/weather/rainy.png'" fill alt="Pioggia">
+              </div>
+              Pioggia
+            </div>
+          </td>
+          <td>17°</td>
+          <td>1.1 mm</td>
+          <td>77%</td>
+        </tr>
+      </table>
+
+    </div>
   </div>
 </app-card>
