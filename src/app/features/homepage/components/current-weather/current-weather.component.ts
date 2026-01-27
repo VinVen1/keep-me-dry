@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {CardComponent} from '../../../../shared/ui';
+import {CardComponent} from '@kmd/shared/ui';
 
 @Component({
-  selector: 'app-current-weather',
+  selector: 'kmd-current-weather',
   imports: [
     NgOptimizedImage,
     CardComponent

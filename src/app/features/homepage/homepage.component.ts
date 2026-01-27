@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CurrentWeatherComponent} from './components/current-weather/current-weather.component';
 import {HourlyWeatherComponent} from './components/hourly-weather/hourly-weather.component';
+import {ForecastComponent} from './components/forecast/forecast.component';
+import {FORECAST_MOCK} from '@kmd/shared/mock/forecast';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'kmd-homepage',
   imports: [
     CurrentWeatherComponent,
-    HourlyWeatherComponent
+    HourlyWeatherComponent,
+    ForecastComponent
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent {
 
+forecast = FORECAST_MOCK
 }

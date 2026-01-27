@@ -1,0 +1,29 @@
+<kmd-card>
+    <div class="forecast-container">
+    @for (day of forecastInfo(); track day.dt) {
+      <div class="forecast-col">
+        <div class="forecast-date">
+          <h5 class="day">{{day.dt | date:'dd'}}</h5>
+          <span class="date">{{day.dt | date: 'MMM yyyy'}}</span>
+        </div>
+        <div class="forecast-row">
+          <div class="weather-img">
+            <img ngSrc="assets/img/weather/sunny.png" fill priority="1" [alt]="'sunny'">
+          </div>
+        </div>
+        <div class="forecast-row">
+          <span>{{day.temp.day | unit: 'temp'}}</span>
+        </div>
+        <div class="forecast-row">
+          <span>{{day.humidity}} %</span>
+        </div>
+        <div class="forecast-row">
+          <span>{{day.uvi}}</span>
+        </div>
+        <div class="forecast-row">
+          <span>{{day.wind_speed | unit: 'speed'}}</span>
+        </div>
+      </div>
+    }
+  </div>
+</kmd-card>
