@@ -13,7 +13,11 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "@kmd/shared/*": ["app/shared/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -29,5 +33,5 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
 }

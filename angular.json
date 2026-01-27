@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "weather-app": {
+    "keep-me-dry": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,7 +22,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "kmd",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "weather-app:build:production"
+              "buildTarget": "keep-me-dry:build:production"
             },
             "development": {
-              "buildTarget": "weather-app:build:development"
+              "buildTarget": "keep-me-dry:build:development"
             }
           },
           "defaultConfiguration": "development"

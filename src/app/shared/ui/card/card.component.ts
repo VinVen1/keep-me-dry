@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
-  selector: 'app-card',
+  selector: 'kmd-card',
   imports: [],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',

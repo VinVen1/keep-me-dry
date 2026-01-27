@@ -1,13 +1,12 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-
-  .min-max{
-    display: flex;
-  }
-}
-
 .hourly-info {
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .min-max{
+      display: flex;
+    }
+  }
 
   .hourly-table{
     overflow-x: scroll;
