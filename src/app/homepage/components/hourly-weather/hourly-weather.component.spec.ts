@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HourlyWeatherComponent } from './hourly-weather.component';
+import {HourlyWeatherComponent} from './hourly-weather.component';
 
 describe('HourlyWeatherComponent', () => {
   let component: HourlyWeatherComponent;

@@ -24,23 +24,23 @@ export interface WeatherResponse {
   /**
    *  Current weather data API response
    */
-  current: CurrentWeatherInfo;
+  current?: CurrentWeatherInfo;
   /**
    * Hourly forecast weather data API response
    */
-  hourly: HourlyWeatherInfo[];
+  hourly?: HourlyWeatherInfo[];
   /**
    *  Minute forecast weather data API response
    */
-  minutely: MinutelyWeatherInfo[];
+  minutely?: MinutelyWeatherInfo[];
   /**
    * Daily forecast weather data API response
    */
-  daily: DailyWeatherInfo[];
+  daily?: DailyWeatherInfo[];
   /**
    * National weather alerts data from major national weather warning systems
    */
-  alerts: Alert[];
+  alerts?: Alert[];
 }
 
 export interface WeatherInfo {
