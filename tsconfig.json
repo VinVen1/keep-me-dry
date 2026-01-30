@@ -16,7 +16,8 @@
     "module": "preserve",
     "baseUrl": "src",
     "paths": {
-      "@kmd/shared/*": ["app/shared/*"]
+      "@kmd/shared/*": ["app/shared/*"],
+      "@kmd/core": ["app/core"],
     }
   },
   "angularCompilerOptions": {
