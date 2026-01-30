@@ -1,11 +1,14 @@
 import {computed, Injectable, signal} from '@angular/core';
 
+const DEFAULT_MSG = "Caricamento in corso..."
+
 @Injectable({
   providedIn: 'root',
 })
+
 export class LoadingService {
 
-  private readonly _message = signal<string | null>(null);
+  private readonly _message = signal<string>(DEFAULT_MSG);
   message = this._message.asReadonly();
 
   private readonly _requestCount = signal<number>(0)
@@ -27,7 +30,7 @@ export class LoadingService {
   hide() {
     this._requestCount.update(count => Math.max(0, count - 1));
     if (this._requestCount() === 0)
-      this._message.set(null);
+      this._message.set(DEFAULT_MSG);
   }
 
 }
