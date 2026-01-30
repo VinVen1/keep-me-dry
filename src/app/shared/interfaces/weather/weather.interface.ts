@@ -1,16 +1,52 @@
+
+/**
+ * Represents the response object for weather data.
+ * Contains detailed information about current, hourly, daily, and minute-level weather forecasts,
+ * timezone information, and weather alerts for the requested location.
+ */
 export interface WeatherResponse {
+  /**
+   Latitude, decimal (-90; 90)
+   */
   lat: number
+  /**
+   * Longitude, decimal (-180; 180).
+   */
   lon: number
+  /**
+   * Timezone name for the requested location
+   */
   timezone: string
+  /**
+   * Shift in seconds from UTC
+   */
   timezone_offset: number
+  /**
+   *  Current weather data API response
+   */
   current: CurrentWeatherInfo;
+  /**
+   * Hourly forecast weather data API response
+   */
   hourly: HourlyWeatherInfo[];
+  /**
+   *  Minute forecast weather data API response
+   */
   minutely: MinutelyWeatherInfo[];
+  /**
+   * Daily forecast weather data API response
+   */
   daily: DailyWeatherInfo[];
+  /**
+   * National weather alerts data from major national weather warning systems
+   */
   alerts: Alert[];
 }
 
 export interface WeatherInfo {
+  /**
+   * Current time or time of forecasted data (Hours, Days)
+   */
   dt: number;
   temp: number | DailyTemp;
   feels_like: number | DailyTemp;
@@ -41,6 +77,9 @@ export interface CurrentWeatherInfo extends WeatherInfo {
 }
 
 export interface MinutelyWeatherInfo {
+  /**
+   *  Minute forecast weather data API response
+   */
   dt: number;
   precipitation: number;
 }
