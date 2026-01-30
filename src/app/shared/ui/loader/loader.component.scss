@@ -1,0 +1,47 @@
+.loader-container{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #2B2C5A;
+  z-index: 200;
+  top: 0;
+  left: 0;
+}
+
+.loader-msg{
+  margin-top: 20px;
+  color: #F4FAFC;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: block;
+  margin:15px auto;
+  position: relative;
+  background: #FFCE71;
+  color: #F4FAFC;
+  box-shadow: -24px 0, 24px 0;
+  box-sizing: border-box;
+  animation: rotation 2s ease-in-out infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+  Taken from https://cssloaders.github.io/
+ */
