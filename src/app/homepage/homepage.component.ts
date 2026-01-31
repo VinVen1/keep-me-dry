@@ -1,20 +1,21 @@
-import {Component} from '@angular/core';
-import {CurrentWeatherComponent} from './components/current-weather/current-weather.component';
-import {HourlyWeatherComponent} from './components/hourly-weather/hourly-weather.component';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {ForecastComponent} from './components/forecast/forecast.component';
-import {FORECAST_MOCK} from '@kmd/shared/mock/forecast';
+import {WeatherService} from './services/weather.service';
 
 @Component({
   selector: 'kmd-homepage',
   imports: [
-    CurrentWeatherComponent,
-    HourlyWeatherComponent,
     ForecastComponent
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomepageComponent {
+  private readonly _weatherService = inject(WeatherService);
 
-forecast = FORECAST_MOCK
+  protected forecast = this._weatherService.daily;
+  protected current = this._weatherService.current;
+  protected hourly = this._weatherService.hourly;
+
 }

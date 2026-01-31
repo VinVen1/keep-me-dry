@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {CardComponent} from '@kmd/shared/ui';
 import {NgOptimizedImage} from '@angular/common';
+import {HourlyWeatherInfo} from '@kmd/shared/interfaces/weather';
 
 @Component({
   selector: 'kmd-hourly-weather',
@@ -12,5 +13,5 @@ import {NgOptimizedImage} from '@angular/common';
   styleUrl: './hourly-weather.component.scss',
 })
 export class HourlyWeatherComponent {
-
+  hourlyData = input.required<HourlyWeatherInfo>();
 }

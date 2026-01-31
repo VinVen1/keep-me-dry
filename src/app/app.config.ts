@@ -3,12 +3,12 @@ import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {ApiKeyInterceptor} from '@kmd/core';
+import {ApiKeyInterceptor, ErrorInterceptor} from '@kmd/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([ApiKeyInterceptor]))
+    provideHttpClient(withInterceptors([ApiKeyInterceptor, ErrorInterceptor]))
   ]
 };
