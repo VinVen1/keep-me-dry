@@ -20,6 +20,8 @@ import {environment} from '../../environments/environment';
  * @returns {Observable<HttpEvent>} The observable resulting from the modified HTTP request.
  */
 export const ApiKeyInterceptor: HttpInterceptorFn = (req, next) => {
-  req.params.append('appid', environment.openWeatherKey)
-  return next(req);
+  const request = req.clone({
+    params: req.params.append('appid', environment.openWeatherKey)
+  })
+  return next(request);
 };

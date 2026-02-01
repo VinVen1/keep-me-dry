@@ -1,7 +1,7 @@
 import {computed, inject, Injectable, signal} from '@angular/core';
 import {WeatherHttpService} from '@kmd/shared/http';
 import {WeatherResponse} from '@kmd/shared/interfaces/weather';
-import {LoadingService} from '@kmd/shared/services';
+import {LoadingService, UnitMeasureService} from '@kmd/shared/services';
 import {finalize} from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,7 @@ import {finalize} from 'rxjs';
 export class WeatherService {
   private readonly _weatherHttp = inject(WeatherHttpService);
   private readonly _loadingService = inject(LoadingService);
+  private readonly _unitMeasure = inject(UnitMeasureService)
   private readonly _weatherState = signal<WeatherResponse>({
     lat: 0,
     lon: 0,
@@ -23,14 +24,14 @@ export class WeatherService {
   });
 
   readonly current = computed(() => this._weatherState().current);
-  readonly hourly = computed(() => this._weatherState().hourly ?? []);
+  readonly hourly = computed(() => this._weatherState().hourly ?? [ ]);
   readonly daily = computed(() => this._weatherState().daily ?? []);
   readonly alerts = computed(() => this._weatherState().alerts ?? []);
   readonly currentTime = computed(() => new Date(this.current()?.dt ?? ''))
 
   getAllWeather(): void {
     this._loadingService.show()
-    this._weatherHttp.getAllBy(40.79, 14.35, 'it')
+    this._weatherHttp.getAllBy({lat:40.79, lon: 14.35, lang: 'it', units: this._unitMeasure.selectedUnit()})
       .pipe(
         finalize(() => this._loadingService.hide()),
       )

@@ -3,8 +3,16 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WeatherResponse} from '@kmd/shared/interfaces/weather';
 import {environment} from '../../../environments/environment';
+import {UnitMeasure} from '@kmd/shared/interfaces/unit-measure.type';
 
 type Languages = "it" | "en";
+
+interface WeatherParams {
+  lon: number,
+  lat: number,
+  lang: Languages,
+  units: UnitMeasure
+}
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +23,12 @@ export class WeatherHttpService {
 
   /**
    * Get all weather data by latitude and longitude
-   * @param lat - Latitude, decimal(-90, 90)
-   * @param lon - Longitude, decimal(-180, 180)
-   * @param lang - Language
+   * @param params
    */
-  getAllBy(lat: number, lon: number, lang: Languages): Observable<WeatherResponse> {
+  getAllBy(params: WeatherParams): Observable<WeatherResponse> {
     return this._http.get<WeatherResponse>(`${this._apiUrl}`, {
       params: {
-        lat, lon, lang
+        ...params
       }
     })
   }
