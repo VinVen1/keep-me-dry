@@ -1,39 +1,41 @@
 <kmd-card>
   <div class="main-info">
-
+    @let current = currentWeather();
     <div class="left">
       <h2 class="city">{{ 'Napoli' }}</h2>
       <div class="additional-info">
         <div class="info-element">
           <span class="title">Percepita</span>
-          <span class="info">23°</span>
+          <span class="info">{{current?.feels_like |  unit: 'temp'}}</span>
         </div>
 
         <div class="info-element">
           <span class="title">Umidità</span>
-          <span class="info">43%</span>
+          <span class="info">{{current?.humidity}}</span>
         </div>
       </div>
       <div class="additional-info">
         <div class="info-element">
           <span class="title">Vento</span>
-          <span class="info">30 Km/h</span>
+          <span class="info">{{current?.wind_speed | unit: 'speed'}}</span>
         </div>
 
         <div class="info-element">
           <span class="title">Indice UV</span>
-          <span class="info">1</span>
+          <span class="info">{{current?.uvi}}</span>
         </div>
       </div>
     </div>
 
     <div>
-      <div class="weather">
-        <div class="weather-img">
-          <img ngSrc="../../../../assets/img/weather/storm.png" [priority]="0" fill alt="Pioggia">
+      @if (currentWeather()) {
+        <div class="weather">
+          <div class="weather-img">
+            <img [ngSrc]="currentWeather()?.weather?.[0]?.icon | weatherIcon" [priority]="0" fill alt="Pioggia">
+          </div>
+          <span class="main-temp">{{ current?.temp | unit: 'temp' }}</span>
         </div>
-        <span class="main-temp">23°</span>
-      </div>
+      }
     </div>
   </div>
 </kmd-card>

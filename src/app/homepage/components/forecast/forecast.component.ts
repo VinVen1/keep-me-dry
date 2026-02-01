@@ -3,6 +3,7 @@ import {CardComponent} from '@kmd/shared/ui';
 import {DailyWeatherInfo} from '@kmd/shared/interfaces/weather/weather.interface';
 import {DatePipe, NgOptimizedImage} from '@angular/common';
 import {UnitMeasurePipe} from '@kmd/shared/pipes/unit-measure-pipe';
+import {WeatherIconPipe} from '@kmd/shared/pipes/weather-icon-pipe';
 
 @Component({
   selector: 'kmd-forecast',
@@ -10,7 +11,8 @@ import {UnitMeasurePipe} from '@kmd/shared/pipes/unit-measure-pipe';
     CardComponent,
     NgOptimizedImage,
     UnitMeasurePipe,
-    DatePipe
+    DatePipe,
+    WeatherIconPipe,
   ],
   templateUrl: './forecast.component.html',
   styleUrl: './forecast.component.scss',
