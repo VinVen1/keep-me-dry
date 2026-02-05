@@ -30,10 +30,10 @@ import {MEASURE_UNITS} from '@kmd/shared/utils/unit-conversion';
 export class UnitMeasurePipe implements PipeTransform {
   private _selectedUnit = inject(UnitMeasureService).selectedUnit();
 
-  transform(value: number | undefined | null, measurementType: MeasurementType): string {
+  transform(value: number | undefined | null, measurementType: MeasurementType, fractionDigits: number = 0): string {
     const unitMeasure = MEASURE_UNITS[this._selectedUnit][measurementType];
     if(value) {
-      return `${value.toFixed(1)} ${unitMeasure}`;
+      return `${value.toFixed(fractionDigits)} ${unitMeasure}`;
     }
 
     return '-'
