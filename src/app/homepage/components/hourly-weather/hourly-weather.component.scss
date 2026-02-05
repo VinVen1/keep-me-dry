@@ -3,34 +3,33 @@
     display: flex;
     justify-content: space-between;
 
-    .min-max{
+    .min-max {
       display: flex;
     }
   }
 
-  .hourly-table{
+  .hourly-table {
     overflow-x: scroll;
     padding-bottom: 20px;
-    table{
+
+    table {
       width: 100%;
       border-spacing: 10px;
       border-bottom: #2C2D2D 1px solid;
       border-collapse: collapse;
-      th,td {
+
+      th, td {
         font-size: 16px;
         padding: 10px 15px;
         text-align: center;
         border-bottom: #2C2D2D 1px solid;
       }
 
-      .weather-cell {
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
-        .img-cell {
+      .img-cell {
+        div {
           position: relative;
-          margin-right: 10px;
+          margin-left: auto;
           width: 32px;
           height: 32px;
         }

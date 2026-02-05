@@ -2,12 +2,16 @@ import {ChangeDetectionStrategy, Component, effect, inject, OnInit} from '@angul
 import {ForecastComponent} from './components/forecast/forecast.component';
 import {WeatherService} from './services/weather.service';
 import {CurrentWeatherComponent} from './components/current-weather/current-weather.component';
+import {HourlyWeatherComponent} from './components/hourly-weather/hourly-weather.component';
+import {CardComponent} from '@kmd/shared/ui';
 
 @Component({
   selector: 'kmd-homepage',
   imports: [
     ForecastComponent,
-    CurrentWeatherComponent
+    CurrentWeatherComponent,
+    HourlyWeatherComponent,
+    CardComponent
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',

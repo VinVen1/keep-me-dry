@@ -1,6 +1,10 @@
 <div class="container homepage">
 
-  <kmd-current-weather [currentWeather]="current()"></kmd-current-weather>
-<!--  <kmd-hourly-weather></kmd-hourly-weather>-->
-  <kmd-forecast [forecastInfo]="forecast()"></kmd-forecast>
+  <kmd-card>
+    <kmd-current-weather [currentWeather]="current()"></kmd-current-weather>
+    <kmd-hourly-weather [hourlyData]="hourly()"></kmd-hourly-weather>
+  </kmd-card>
+  <kmd-card>
+    <kmd-forecast [forecastInfo]="forecast()"></kmd-forecast>
+  </kmd-card>
 </div>

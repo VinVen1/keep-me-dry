@@ -1,10 +1,9 @@
-<kmd-card>
     <div class="forecast-container">
     @for (day of forecastInfo(); track day.dt) {
       <div class="forecast-col">
         <div class="forecast-date">
           <h5 class="day">{{day.dt * 1000 | date:'dd'}}</h5>
-          <span class="date">{{day.dt * 1000| date: 'MMM yyyy'}}</span>
+          <p class="date">{{day.dt * 1000| date: 'MMM yyyy'}}</p>
         </div>
         <div class="forecast-row">
           <div class="weather-img">
@@ -12,7 +11,7 @@
           </div>
         </div>
         <div class="forecast-row">
-          <span>{{day.temp.day | unit: 'temp'}}</span>
+          <span>{{day.temp.day | unit: 'temp' : 0}}</span>
         </div>
         <div class="forecast-row">
           <span>{{day.humidity}} %</span>
@@ -26,4 +25,3 @@
       </div>
     }
   </div>
-</kmd-card>

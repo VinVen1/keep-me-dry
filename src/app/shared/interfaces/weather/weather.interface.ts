@@ -59,6 +59,7 @@ export interface WeatherInfo {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
+  rain?: Rain | number;
   weather: Weather[];
 }
 
@@ -67,6 +68,10 @@ export interface Weather {
   main: string;
   description: string;
   icon: WeatherIcons;
+}
+
+export interface Rain {
+  "1h": string
 }
 
 export interface CurrentWeatherInfo extends WeatherInfo {
