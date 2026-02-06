@@ -7,9 +7,11 @@ import {
   WeatherInfo,
   WeatherResponse
 } from '@kmd/shared/interfaces/weather';
-import {LoadingService, UnitMeasureService} from '@kmd/shared/services';
+import {CacheService, LoadingService, UnitMeasureService} from '@kmd/shared/services';
 import {finalize} from 'rxjs';
 
+
+const CACHE_KEY = 'weather';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +19,8 @@ export class WeatherService {
   private readonly _weatherHttp = inject(WeatherHttpService);
   private readonly _loadingService = inject(LoadingService);
   private readonly _unitMeasure = inject(UnitMeasureService)
+  private readonly _cache = inject(CacheService)
+
   private readonly _weatherState = signal<WeatherResponse>({
     lat: 0,
     lon: 0,
@@ -41,13 +45,22 @@ export class WeatherService {
   readonly currentTime = computed(() => new Date((this.current()?.dt ?? 0) * 1000))
 
   getAllWeather(): void {
-    this._loadingService.show()
+    if(this._cache.isCached(CACHE_KEY)) {
+      this._weatherState.set(this._cache.getData(CACHE_KEY) as WeatherResponse)
+      return;
+    }
+
+    this._cache.removeData(CACHE_KEY)
+    this._loadingService.show();
     this._weatherHttp.getAllBy({lat: 40.79, lon: 14.35, lang: 'it', units: this._unitMeasure.selectedUnit()})
       .pipe(
         finalize(() => this._loadingService.hide()),
       )
       .subscribe({
-        next: response => this._weatherState.set(response)
+        next: response => {
+          this._cache.setData(CACHE_KEY, response)
+          this._weatherState.set(response)
+        }
       })
   }
 
