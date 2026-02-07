@@ -1,11 +1,10 @@
-import {TestBed} from '@angular/core/testing';
-import {HttpInterceptorFn} from '@angular/common/http';
-
-import {apiKeyInterceptor} from './api-key-interceptor';
+import { TestBed } from '@angular/core/testing';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { ApiKeyInterceptor } from './api-key-interceptor';
 
 describe('apiKeyInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
-    TestBed.runInInjectionContext(() => apiKeyInterceptor(req, next));
+    TestBed.runInInjectionContext(() => ApiKeyInterceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

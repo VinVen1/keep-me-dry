@@ -1,5 +1,5 @@
-import {HttpInterceptorFn} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 /**
  * ApiKeyInterceptor is an HTTP interceptor function that appends an OpenWeather API key
@@ -21,7 +21,7 @@ import {environment} from '../../environments/environment';
  */
 export const ApiKeyInterceptor: HttpInterceptorFn = (req, next) => {
   const request = req.clone({
-    params: req.params.append('appid', environment.openWeatherKey)
-  })
+    params: req.params.append('appid', environment.openWeatherKey),
+  });
   return next(request);
 };
