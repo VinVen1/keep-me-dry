@@ -1,15 +1,10 @@
   <div class="hourly-info">
 
-    <div class="header">
-      <h2>Giornaliero</h2>
-    </div>
-
     <div class="hourly-table">
       <table >
         <tr>
           <th>Ora</th>
-          <th></th>
-          <th>Condizioni</th>
+          <th colspan="2">Condizioni</th>
           <th>Temperatura</th>
           <th>Precipitazioni</th>
           <th>Umidità</th>
@@ -17,7 +12,7 @@
 
         @for (hour of hourlyData(); track hour.dt) {
           <tr>
-            <td>{{ hour.dt * 1000 | date: 'hh:mm'  }}</td>
+            <td>{{ hour.dt * 1000 | date: 'H:mm'  }}</td>
             <td class="img-cell">
               <div>
                 <img [ngSrc]="hour.weather[0].icon | weatherIcon" fill [alt]="hour.weather[0].description">
@@ -25,7 +20,7 @@
             <td>
                 {{ hour.weather[0].description | titlecase }}
             </td>
-            <td>{{hour.temp}}</td>
+            <td>{{hour.temp | unit: 'temp'}}</td>
             <td>{{hour.rain ?? 0}} mm</td>
             <td>{{hour.humidity}}</td>
           </tr>

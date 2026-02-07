@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {DatePipe, NgOptimizedImage, TitleCasePipe} from '@angular/common';
 import {HourlyWeatherInfo} from '@kmd/shared/interfaces/weather';
-import {WeatherIconPipe} from '@kmd/shared/pipes';
+import {UnitMeasurePipe, WeatherIconPipe} from '@kmd/shared/pipes';
 
 @Component({
   selector: 'kmd-hourly-weather',
@@ -9,7 +9,8 @@ import {WeatherIconPipe} from '@kmd/shared/pipes';
     NgOptimizedImage,
     DatePipe,
     WeatherIconPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    UnitMeasurePipe
   ],
   templateUrl: './hourly-weather.component.html',
   styleUrl: './hourly-weather.component.scss',
