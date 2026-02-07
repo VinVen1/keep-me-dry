@@ -43,3 +43,15 @@ h2 {
     font-size: 20px
   }
 }
+
+
+input{
+  padding: 10px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 8px;
+
+  &:focus {
+    outline: none;
+  }
+}

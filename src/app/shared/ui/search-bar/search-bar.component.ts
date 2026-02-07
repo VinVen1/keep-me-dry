@@ -1,12 +1,43 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
+import { Language } from '@kmd/shared/interfaces';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'kmd-search-bar',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
+  private readonly _destroyRef = inject(DestroyRef);
   currentLocality = input<string>();
+  localitiesList = input<unknown[]>(['Napoli', 'Napoli', 'Napoli', 'Napoli']);
+  currentLang = input<Language>();
+
+  searchControl = new FormControl<string>('');
+
+  onLocalitySearch = output<string>();
+  onLocalitySelect = output<{ lat: number; lon: number }>();
+  onLangSwitch = output<Language>();
+
+  ngOnInit() {
+    this.listenSearchChanges();
+  }
+
+  private listenSearchChanges() {
+    this.searchControl.valueChanges
+      .pipe(distinctUntilChanged(), debounceTime(300), takeUntilDestroyed(this._destroyRef))
+      .subscribe((value: string | null) => this.onLocalitySearch.emit(value ?? ''));
+  }
 }

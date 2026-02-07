@@ -1,1 +1,12 @@
-<p>search-bar works!</p>
+<div class="search-bar">
+  <div class="search-input">
+    <input id="locality" [formControl]="searchControl" placeholder="Cerca località...">
+    <ul class="result-list">
+      @for (locality of localitiesList(); track locality) {
+        <li>
+          {{locality}}
+        </li>
+      }
+    </ul>
+  </div>
+</div>
