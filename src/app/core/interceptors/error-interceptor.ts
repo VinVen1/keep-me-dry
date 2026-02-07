@@ -1,5 +1,5 @@
-import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
-import {catchError, throwError} from 'rxjs';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 /**
  * An HTTP interceptor function that catches and handles HTTP errors during
@@ -22,8 +22,8 @@ export const ErrorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       const message = getErrorMessage(error);
       console.error(`[HTTP ${error.status}] ${message}`, error.message);
-      return throwError(() => error)
-    })
+      return throwError(() => error);
+    }),
   );
 };
 
@@ -34,7 +34,7 @@ function getErrorMessage(error: HttpErrorResponse): string {
     403: 'Non sei autorizzato a vedere questa risorsa',
     404: 'Risorsa non trovata',
     500: 'Errore del server',
-    503: 'Servizio non disponibile'
+    503: 'Servizio non disponibile',
   };
 
   return messages[error.status] || error.error?.message || 'Errore sconosciuto';

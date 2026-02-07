@@ -17,7 +17,7 @@
     "baseUrl": "src",
     "paths": {
       "@kmd/shared/*": ["app/shared/*"],
-      "@kmd/core": ["app/core"],
+      "@kmd/core/*": ["app/core/*"],
     }
   },
   "angularCompilerOptions": {
