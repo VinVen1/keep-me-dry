@@ -4,10 +4,17 @@ import { WeatherService } from './services/weather.service';
 import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
 import { HourlyWeatherComponent } from './components/hourly-weather/hourly-weather.component';
 import { CardComponent } from '@kmd/shared/ui';
+import { SearchBarComponent } from '@kmd/shared/ui/search-bar/search-bar.component';
 
 @Component({
   selector: 'kmd-homepage',
-  imports: [ForecastComponent, CurrentWeatherComponent, HourlyWeatherComponent, CardComponent],
+  imports: [
+    ForecastComponent,
+    CurrentWeatherComponent,
+    HourlyWeatherComponent,
+    CardComponent,
+    SearchBarComponent,
+  ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
