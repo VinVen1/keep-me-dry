@@ -2,9 +2,9 @@
   <div class="search-input">
     <input id="locality" [formControl]="searchControl" placeholder="Cerca località...">
     <ul class="result-list">
-      @for (locality of localitiesList(); track locality) {
-        <li>
-          {{locality}}
+      @for (locality of localitiesList(); track locality.name) {
+        <li (click)="selectLocality(locality)">
+          {{locality.name}}
         </li>
       }
     </ul>
