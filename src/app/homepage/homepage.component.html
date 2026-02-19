@@ -1,5 +1,10 @@
 <div class="container homepage">
-  <kmd-search-bar></kmd-search-bar>
+  <kmd-search-bar [currentLocality]="currentLocality()"
+                  [localitiesList]="localities()"
+                  (onLocalitySearch)="searchLocalities($event)"
+                  (onLocalitySelect)="localitySelect($event)"
+                  (onLangSwitch)="changeLang($event)"
+  ></kmd-search-bar>
   <kmd-card>
     <kmd-current-weather [currentWeather]="current()"></kmd-current-weather>
     <kmd-hourly-weather [hourlyData]="hourly()"></kmd-hourly-weather>

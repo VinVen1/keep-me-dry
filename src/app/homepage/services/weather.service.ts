@@ -1,15 +1,14 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
-import {WeatherHttpService} from '@kmd/shared/http';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { WeatherHttpService } from '@kmd/shared/http';
 import {
   CurrentWeatherInfo,
   DailyWeatherInfo,
   HourlyWeatherInfo,
   WeatherInfo,
-  WeatherResponse
+  WeatherResponse,
 } from '@kmd/shared/interfaces/weather';
-import {CacheService, LoadingService, UnitMeasureService} from '@kmd/shared/services';
-import {finalize} from 'rxjs';
-
+import { CacheService, LoadingService, UnitMeasureService } from '@kmd/shared/services';
+import { finalize } from 'rxjs';
 
 const CACHE_KEY = 'weather';
 @Injectable({
@@ -18,8 +17,8 @@ const CACHE_KEY = 'weather';
 export class WeatherService {
   private readonly _weatherHttp = inject(WeatherHttpService);
   private readonly _loadingService = inject(LoadingService);
-  private readonly _unitMeasure = inject(UnitMeasureService)
-  private readonly _cache = inject(CacheService)
+  private readonly _unitMeasure = inject(UnitMeasureService);
+  private readonly _cache = inject(CacheService);
 
   private readonly _weatherState = signal<WeatherResponse>({
     lat: 0,
@@ -30,47 +29,54 @@ export class WeatherService {
     hourly: [],
     minutely: [],
     daily: [],
-    alerts: []
+    alerts: [],
   });
 
   readonly current = computed(() => {
-    const _current = this._weatherState().current
-    if (_current)
-      return this.normalizeRainData(_current) as CurrentWeatherInfo
-    return undefined
+    const _current = this._weatherState().current;
+    if (_current) return this.normalizeRainData(_current) as CurrentWeatherInfo;
+    return undefined;
   });
-  readonly hourly = computed(() => this._weatherState().hourly?.map(this.normalizeRainData).slice(0, 10) as HourlyWeatherInfo[] ?? []);
-  readonly daily = computed(() => this._weatherState().daily?.map(this.normalizeRainData).slice(0, 5) as DailyWeatherInfo[] ?? []);
+  readonly hourly = computed(
+    () =>
+      (this._weatherState()
+        .hourly?.map(this.normalizeRainData)
+        .slice(0, 10) as HourlyWeatherInfo[]) ?? [],
+  );
+  readonly daily = computed(
+    () =>
+      (this._weatherState().daily?.map(this.normalizeRainData).slice(0, 5) as DailyWeatherInfo[]) ??
+      [],
+  );
   readonly alerts = computed(() => this._weatherState().alerts ?? []);
-  readonly currentTime = computed(() => new Date((this.current()?.dt ?? 0) * 1000))
+  readonly currentTime = computed(() => new Date((this.current()?.dt ?? 0) * 1000));
 
-  getAllWeather(): void {
-    if(this._cache.isCached(CACHE_KEY)) {
-      this._weatherState.set(this._cache.getData(CACHE_KEY) as WeatherResponse)
-      return;
+  getAllWeather(lat: number = 40.79, lon: number = 14.35): void {
+    if (this._cache.isCached(CACHE_KEY)) {
+      const cachedData = this._cache.getData(CACHE_KEY) as WeatherResponse;
+      if (cachedData.lat === lat && cachedData.lon === lon) {
+        this._weatherState.set(cachedData);
+        return;
+      }
     }
 
-    this._cache.removeData(CACHE_KEY)
+    this._cache.removeData(CACHE_KEY);
     this._loadingService.show();
-    this._weatherHttp.getAllBy({lat: 40.79, lon: 14.35, lang: 'it', units: this._unitMeasure.selectedUnit()})
-      .pipe(
-        finalize(() => this._loadingService.hide()),
-      )
+    this._weatherHttp
+      .getAllBy({ lat, lon, lang: 'it', units: this._unitMeasure.selectedUnit() })
+      .pipe(finalize(() => this._loadingService.hide()))
       .subscribe({
-        next: response => {
-          this._cache.setData(CACHE_KEY, response)
-          this._weatherState.set(response)
-        }
-      })
+        next: (response) => {
+          this._cache.setData(CACHE_KEY, response);
+          this._weatherState.set(response);
+        },
+      });
   }
-
 
   private normalizeRainData(weather: WeatherInfo): WeatherInfo {
-    if (weather.rain && typeof (weather.rain) === "object")
-      weather.rain = Object.values(weather.rain)[0] ?? 0
+    if (weather.rain && typeof weather.rain === 'object')
+      weather.rain = Object.values(weather.rain)[0] ?? 0;
 
-    return weather
+    return weather;
   }
-
-
 }
