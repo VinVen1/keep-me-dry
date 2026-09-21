@@ -1,21 +1,20 @@
-import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {DatePipe, NgOptimizedImage, TitleCasePipe} from '@angular/common';
-import {HourlyWeatherInfo} from '@kmd/shared/interfaces/weather';
-import {UnitMeasurePipe, WeatherIconPipe} from '@kmd/shared/pipes';
+import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
+import { HourlyWeatherInfo } from '@kmd/shared/interfaces/weather';
+import { UnitMeasurePipe, WeatherIconPipe } from '@kmd/shared/pipes';
 
 @Component({
   selector: 'kmd-hourly-weather',
-  imports: [
-    NgOptimizedImage,
-    DatePipe,
-    WeatherIconPipe,
-    TitleCasePipe,
-    UnitMeasurePipe
-  ],
+  imports: [NgOptimizedImage, DatePipe, WeatherIconPipe, TitleCasePipe, UnitMeasurePipe],
   templateUrl: './hourly-weather.component.html',
   styleUrl: './hourly-weather.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HourlyWeatherComponent {
   hourlyData = input.required<HourlyWeatherInfo[]>();
+  shown = signal(false);
+
+  manageHourly() {
+    this.shown.update((value) => !value);
+  }
 }

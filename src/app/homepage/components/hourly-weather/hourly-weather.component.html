@@ -1,11 +1,11 @@
   <div class="hourly-info">
-
+    @if (shown()) {
     <div class="hourly-table">
       <table >
         <tr>
           <th>Ora</th>
-          <th colspan="2">Condizioni</th>
           <th>Temperatura</th>
+          <th>Condizioni</th>
           <th>Precipitazioni</th>
           <th>Umidità</th>
         </tr>
@@ -13,14 +13,15 @@
         @for (hour of hourlyData(); track hour.dt) {
           <tr>
             <td>{{ hour.dt * 1000 | date: 'H:mm'  }}</td>
-            <td class="img-cell">
-              <div>
-                <img [ngSrc]="hour.weather[0].icon | weatherIcon" fill [alt]="hour.weather[0].description">
-              </div></td>
-            <td>
-                {{ hour.weather[0].description | titlecase }}
-            </td>
             <td>{{hour.temp | unit: 'temp'}}</td>
+            <td>
+              <div class="img-cell">
+                <div class="weather-icon">
+                  <img [ngSrc]="hour.weather[0].icon | weatherIcon" fill [alt]="hour.weather[0].description">
+                </div>
+                {{ hour.weather[0].description | titlecase }}
+              </div>
+            </td>
             <td>{{hour.rain ?? 0}} mm</td>
             <td>{{hour.humidity}} %</td>
           </tr>
@@ -29,4 +30,9 @@
       </table>
 
     </div>
+    }
+    <button class="show-more" (click)="manageHourly()">
+      <i [class]="'pi ' + ( shown() ? 'pi-chevron-up' : 'pi-chevron-down')"></i>
+      {{shown() ? 'Nascondi' : 'Mostra'}} previsioni orarie
+    </button>
   </div>
