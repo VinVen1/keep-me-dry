@@ -27,9 +27,12 @@
 
 
       .img-cell {
-        div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        .weather-icon {
           position: relative;
-          margin-left: auto;
           width: 32px;
           height: 32px;
         }
