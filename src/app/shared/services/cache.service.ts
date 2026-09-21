@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-
+import { Injectable } from '@angular/core';
 
 const CACHE_TTL = 30;
 const CACHE_TTL_MS = CACHE_TTL * 60 * 1000;
@@ -12,14 +11,13 @@ interface CacheData {
   /**
    * Last save timestamp
    */
-  ts: number
+  ts: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
-
   /**
    * Checks if the data associated with the given key is cached and valid.
    *
@@ -38,7 +36,7 @@ export class CacheService {
    * @return {unknown | undefined} The data associated with the key, or undefined if no data exists for the given key.
    */
   getData(key: string): unknown | undefined {
-    return this.getCache(key)?.data
+    return this.getCache(key)?.data;
   }
 
   /**
@@ -49,34 +47,41 @@ export class CacheService {
    * @param {*} data - The data to be stored in sessionStorage.
    * @return {void} This method does not return a value.
    */
-  setData(key: string, data: any): void {
+  setData(key: string, data: unknown): void {
     const currentTimestamp = new Date().getTime();
     const cache: CacheData = {
       ts: currentTimestamp,
-      data: data
-    }
+      data: data,
+    };
 
-    sessionStorage.setItem(key, JSON.stringify(cache))
+    try {
+      sessionStorage.setItem(key, JSON.stringify(cache));
+    } catch {
+      console.warn(
+        '[CacheService - setData()] Storage quota exceeded or save failed. Key removed.',
+      );
+      this.removeData(key);
+    }
   }
 
   removeData(key: string) {
-    sessionStorage.removeItem(key)
+    sessionStorage.removeItem(key);
   }
 
   private getCache(key: string): CacheData | undefined {
-    try{
+    try {
       const cache = sessionStorage.getItem(key);
-      return cache ? JSON.parse(cache) : undefined
-    } catch (e) {
+      return cache ? JSON.parse(cache) : undefined;
+    } catch {
       console.warn('[CacheService - getCache()] Failed to retrieve or parse cache');
       this.removeData(key);
-      return undefined
+      return undefined;
     }
   }
 
   private isValid(timestamp: number): boolean {
-    const expiration = timestamp + CACHE_TTL_MS
-    const currentTimestamp = new Date().getTime()
+    const expiration = timestamp + CACHE_TTL_MS;
+    const currentTimestamp = new Date().getTime();
 
     return expiration > currentTimestamp;
   }

@@ -9,8 +9,10 @@ import {
 } from '@kmd/shared/interfaces/weather';
 import { CacheService, LoadingService, UnitMeasureService } from '@kmd/shared/services';
 import { finalize } from 'rxjs';
+import { DEFAULT_LAT, DEFAULT_LON } from '@kmd/shared/utils';
 
 const CACHE_KEY = 'weather';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -51,7 +53,7 @@ export class WeatherService {
   readonly alerts = computed(() => this._weatherState().alerts ?? []);
   readonly currentTime = computed(() => new Date((this.current()?.dt ?? 0) * 1000));
 
-  getAllWeather(lat: number = 40.79, lon: number = 14.35): void {
+  getAllWeather(lat: number = DEFAULT_LAT, lon: number = DEFAULT_LON): void {
     if (this._cache.isCached(CACHE_KEY)) {
       const cachedData = this._cache.getData(CACHE_KEY) as WeatherResponse;
       if (cachedData.lat === lat && cachedData.lon === lon) {

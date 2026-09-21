@@ -1,12 +1,22 @@
 <div class="search-bar">
   <div class="search-input">
     <input id="locality" [formControl]="searchControl" placeholder="Cerca località...">
-    <ul class="result-list">
-      @for (locality of localitiesList(); track locality.name) {
-        <li (click)="selectLocality(locality)">
-          {{locality.name}}
-        </li>
+    @if (localitiesList().length > 0 && showResults()) {
+      <ul class="result-list">
+        @for (locality of localitiesList(); track locality.name) {
+          <li (click)="selectLocality(locality)">
+            {{locality.name + ', ' + (locality.state ?? '') + ' ' + (locality.country ?? '') }}
+          </li>
+        }
+      </ul>
+    }
+    <div class="icons">
+      @if (searchControl.value !== ''){
+        <button class="clear" (click)="clearSearch()">
+          <i class="pi pi-times"></i>
+        </button>
       }
-    </ul>
+      <i class="pi pi-search"></i>
+    </div>
   </div>
 </div>

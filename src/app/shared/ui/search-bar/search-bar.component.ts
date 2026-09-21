@@ -6,6 +6,7 @@ import {
   input,
   OnInit,
   output,
+  signal,
 } from '@angular/core';
 import { Geolocation, Language } from '@kmd/shared/interfaces';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -22,13 +23,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SearchBarComponent implements OnInit {
   private readonly _destroyRef = inject(DestroyRef);
   currentLocality = input<string>();
-  localitiesList = input<Geolocation[]>();
-  currentLang = 'it';
+  localitiesList = input<Geolocation[]>([]);
+  currentLang: Language = 'it';
 
   searchControl = new FormControl<string>('');
+  showResults = signal<boolean>(false);
 
   onLocalitySearch = output<string>();
-  onLocalitySelect = output<{ lat: number; lon: number }>();
+  onLocalitySelect = output<Geolocation>();
   onLangSwitch = output<Language>();
 
   ngOnInit() {
@@ -38,11 +40,23 @@ export class SearchBarComponent implements OnInit {
   private listenSearchChanges() {
     this.searchControl.valueChanges
       .pipe(distinctUntilChanged(), debounceTime(300), takeUntilDestroyed(this._destroyRef))
-      .subscribe((value: string | null) => this.onLocalitySearch.emit(value ?? ''));
+      .subscribe((value: string | null) => {
+        this.onLocalitySearch.emit(value ?? '');
+        this.showResults.set(true);
+      });
   }
 
   selectLocality(locality: Geolocation) {
-    this.onLocalitySelect.emit({ lat: locality.lat, lon: locality.lon });
-    this.searchControl.setValue(locality.name as string);
+    this.onLocalitySelect.emit(locality);
+    this.searchControl.setValue(
+      locality.local_names ? locality.local_names[this.currentLang] : locality.name,
+    );
+    this.showResults.set(false);
+  }
+
+  clearSearch() {
+    this.searchControl.reset('');
+    this.showResults.set(false);
+    this.onLocalitySearch.emit('');
   }
 }
