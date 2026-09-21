@@ -2,10 +2,10 @@ import { Language } from '@kmd/shared/interfaces/languages.type';
 
 export interface Geolocation {
   name: string;
-  local_names: LocalNames;
+  local_names?: LocalNames;
   lat: number;
   lon: number;
-  country: string;
+  country?: string;
   state?: string;
 }
 

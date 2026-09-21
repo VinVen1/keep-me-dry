@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /* Weather images from https://www.flaticon.com/search?style_id=136&author_id=1&word=weather&type=standard */
+@import "primeicons/primeicons.css";
 @font-face {
   font-family: Nunito;
   src: url("assets/fonts/Nunito-VariableFont_wght.ttf");
@@ -54,4 +55,11 @@ input{
   &:focus {
     outline: none;
   }
+}
+
+button {
+  border: 0;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }

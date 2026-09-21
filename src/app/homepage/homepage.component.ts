@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { ForecastComponent } from './components/forecast/forecast.component';
 import { WeatherService } from './services/weather.service';
 import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
@@ -6,7 +6,7 @@ import { HourlyWeatherComponent } from './components/hourly-weather/hourly-weath
 import { CardComponent } from '@kmd/shared/ui';
 import { SearchBarComponent } from '@kmd/shared/ui/search-bar/search-bar.component';
 import { LocalitiesService } from './services/localities.service';
-import { Language } from '@kmd/shared/interfaces';
+import { Geolocation, Language } from '@kmd/shared/interfaces';
 
 @Component({
   selector: 'kmd-homepage',
@@ -30,11 +30,15 @@ export class HomepageComponent implements OnInit {
   protected hourly = this._weatherService.hourly;
   protected localitiesLoading = this._localitiesService.isLoading;
   protected localities = this._localitiesService.localities;
-  protected currentLocality = signal('');
+  protected currentLocality = computed(() => {
+    const locality = this._localitiesService.currentLocality();
+    const locName = locality.local_names ? locality.local_names['it'] : locality.name;
+    return `${locName}, ${locality.state ?? ''}`;
+  });
 
   ngOnInit() {
     this._localitiesService.getLocalityFromCurrentPosition().subscribe({
-      next: (value) => this._weatherService.getAllWeather(value[0].lat, value[0].lon),
+      next: (value) => this._weatherService.getAllWeather(value.lat, value.lon),
       error: (err) => {
         this._weatherService.getAllWeather();
         console.warn(err);
@@ -42,12 +46,13 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  searchLocalities(locality: string) {
-    this._localitiesService.getLocalities(locality);
+  searchLocalities(localityName: string) {
+    this._localitiesService.getLocalities(localityName);
   }
 
-  localitySelect(coords: { lat: number; lon: number }) {
-    this._weatherService.getAllWeather(coords.lat, coords.lon);
+  localitySelect(locality: Geolocation) {
+    this._localitiesService.setCurrentLocality(locality);
+    this._weatherService.getAllWeather(locality.lat, locality.lon);
   }
 
   changeLang(lang: Language) {

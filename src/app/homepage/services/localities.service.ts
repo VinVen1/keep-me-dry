@@ -1,9 +1,12 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { GeolocationHttpService } from '@kmd/shared/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { finalize, Observable, switchMap } from 'rxjs';
+import { finalize, map, Observable, switchMap, tap } from 'rxjs';
 import { Geolocation } from '@kmd/shared/interfaces';
-import { LoadingService } from '@kmd/shared/services';
+import { CacheService, LoadingService } from '@kmd/shared/services';
+import { DEFAULT_LAT, DEFAULT_LON } from '@kmd/shared/utils';
+
+const LOCALITY_CACHE_KEY = 'locality';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +14,32 @@ import { LoadingService } from '@kmd/shared/services';
 export class LocalitiesService {
   private readonly _geolocationHttp = inject(GeolocationHttpService);
   private readonly _loadingService = inject(LoadingService);
+  private readonly _cache = inject(CacheService);
   private readonly _destroyRef = inject(DestroyRef);
 
   private readonly _isLoading = signal<boolean>(false);
   isLoading = this._isLoading.asReadonly();
   private readonly _localities = signal<Geolocation[]>([]);
   localities = this._localities.asReadonly();
+  private readonly _currentLocality = signal<Geolocation>({
+    name: 'Roma',
+    lat: DEFAULT_LAT,
+    lon: DEFAULT_LON,
+  });
+  currentLocality = this._currentLocality.asReadonly();
+
+  constructor() {
+    const cachedLocality = this._cache.getData(LOCALITY_CACHE_KEY) as Geolocation;
+    if (cachedLocality) this._currentLocality.set(cachedLocality);
+  }
 
   getLocalities(address: string) {
     this._isLoading.set(true);
+
+    if (address.length <= 0) {
+      this._localities.set([]);
+      return;
+    }
 
     this._geolocationHttp
       .getLocalities(address)
@@ -43,9 +63,15 @@ export class LocalitiesService {
   getLocalityFromCurrentPosition() {
     this._loadingService.show();
     return this.getCurrentCoords().pipe(
-      switchMap(({ lat, lon }) =>
-        this.getLocalityFromCoords(lat, lon).pipe(finalize(() => this._loadingService.hide())),
-      ),
+      finalize(() => this._loadingService.hide()),
+      switchMap(({ lat, lon }) => {
+        this._loadingService.show();
+        return this.getLocalityFromCoords(lat, lon).pipe(
+          map((res) => res[0]),
+          tap((locality) => this.setCurrentLocality(locality)),
+          finalize(() => this._loadingService.hide()),
+        );
+      }),
     );
   }
 
@@ -63,5 +89,10 @@ export class LocalitiesService {
         },
       );
     });
+  }
+
+  setCurrentLocality(locality: Geolocation) {
+    this._cache.setData(LOCALITY_CACHE_KEY, locality);
+    this._currentLocality.set(locality);
   }
 }
