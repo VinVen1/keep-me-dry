@@ -1,7 +1,7 @@
-import {inject, Pipe, PipeTransform} from '@angular/core';
-import {MeasurementType} from '@kmd/shared/interfaces/unit-measure.type';
-import {UnitMeasureService} from '@kmd/shared/services/unit-measure.service';
-import {MEASURE_UNITS} from '@kmd/shared/utils/unit-conversion';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { MeasurementType } from '@kmd/shared/interfaces/unit-measure.type';
+import { UnitMeasureService } from '@kmd/shared/services/unit-measure.service';
+import { MEASURE_UNITS } from '@kmd/shared/utils/unit-conversion';
 
 /**
  * UnitMeasurePipe is a custom Angular pipe that formats a given value by appending the appropriate
@@ -26,17 +26,19 @@ import {MEASURE_UNITS} from '@kmd/shared/utils/unit-conversion';
 @Pipe({
   name: 'unit',
 })
-
 export class UnitMeasurePipe implements PipeTransform {
   private _selectedUnit = inject(UnitMeasureService).selectedUnit();
 
-  transform(value: number | undefined | null, measurementType: MeasurementType, fractionDigits: number = 0): string {
+  transform(
+    value: number | undefined | null,
+    measurementType: MeasurementType,
+    fractionDigits: number = 0,
+  ): string {
     const unitMeasure = MEASURE_UNITS[this._selectedUnit][measurementType];
-    if(value) {
+    if (value) {
       return `${value.toFixed(fractionDigits)} ${unitMeasure}`;
     }
 
-    return '-'
+    return `0 ${unitMeasure}`;
   }
-
 }
