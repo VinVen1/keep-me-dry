@@ -1,6 +1,6 @@
 <div class="search-bar">
   <div class="search-input">
-    <input id="locality" [formControl]="searchControl" placeholder="Cerca località...">
+    <input id="locality" [formControl]="searchControl" placeholder="Cerca località..." size="1">
     @if (localitiesList().length > 0 && showResults()) {
       <ul class="result-list">
         @for (locality of localitiesList(); track locality.name) {

@@ -10,17 +10,17 @@
 
   .hourly-table {
     overflow-x: scroll;
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
 
     table {
       width: 100%;
-      border-spacing: 10px;
-      border-bottom: #2C2D2D 1px solid;
+      border-spacing: .625rem;
+      border-bottom: #2C2D2D .062rem solid;
       border-collapse: collapse;
 
       th, td {
-        font-size: 16px;
-        padding: 10px 15px;
+        font-size: 1rem;
+        padding: .625rem .937rem;
         text-align: center;
         border-bottom: #2C2D2D 1px solid;
       }
@@ -30,11 +30,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: .625rem;
         .weather-icon {
           position: relative;
-          width: 32px;
-          height: 32px;
+          width: 2rem;
+          height: 2rem;
         }
       }
     }
