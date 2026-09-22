@@ -1,0 +1,18 @@
+{
+  "name": "kmd-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "axios": "^1.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VinVen1/keep-me-dry.git"
+  },
+  "private": true
+}
