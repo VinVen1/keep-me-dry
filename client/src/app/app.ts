@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoaderComponent } from '@kmd/shared/ui/loader/loader.component';
 import { registerLocaleData } from '@angular/common';
@@ -11,6 +11,7 @@ registerLocaleData(localeIt, 'it-IT', localeItExtra);
   selector: 'kmd-root',
   imports: [RouterOutlet, LoaderComponent],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss',
 })
 export class App {}

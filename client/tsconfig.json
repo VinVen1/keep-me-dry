@@ -14,10 +14,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "baseUrl": "src",
     "paths": {
-      "@kmd/shared/*": ["app/shared/*"],
-      "@kmd/core/*": ["app/core/*"],
+      "@kmd/shared/*": ["./src/app/shared/*"],
+      "@kmd/core/*": ["./src/app/core/*"],
     }
   },
   "angularCompilerOptions": {

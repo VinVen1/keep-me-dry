@@ -1,7 +1,10 @@
 {
-  "name": "weather-app",
+  "name": "weather-app-monorepo",
+  "description": "Angular 21 Weather App with Node.js Proxy",
   "scripts": {
-    "build": "cd client && ng build",
-    "start:local": "npm run build && cd server && npm start"
+    "build": "cd client && npm install && ng build",
+    "start:server": "cd server && npm install && npm start",
+    "start:client": "cd client && ng serve --open",
+    "start": "npm run build && npm run start:server"
   }
 }
