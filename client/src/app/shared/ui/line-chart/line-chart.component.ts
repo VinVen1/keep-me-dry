@@ -1,11 +1,12 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
   input,
-  signal,
   Signal,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { Chart, ChartConfiguration, ChartData } from 'chart.js/auto';
@@ -18,6 +19,7 @@ import { Chart, ChartConfiguration, ChartData } from 'chart.js/auto';
       <canvas class="chart" #lineChart>{{ chart() }}</canvas>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent implements AfterViewInit {
