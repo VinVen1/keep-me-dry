@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios')
+require('dotenv').config()
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -69,7 +70,7 @@ app.get('/api/weather', async (req, res) => {
 		cache.set(key, { timestamp: Date.now(), data });
 		return res.status(200).json(data);
 	} catch (e) {
-		return res.status(500).json({ error: 'OpenWeatherMap API error' });
+		return res.status(500).json({ error: 'OpenWeatherMap API error', message: e.message });
 	}
 })
 
@@ -81,7 +82,7 @@ app.get('/api/geolocation/{*splat}', async (req, res) => {
 		})
 		return res.status(200).json(response.data);
 	} catch (e) {
-		return res.status(500).json({ error: 'OpenWeatherMap API error' });
+		return res.status(500).json({ error: 'OpenWeatherMap API error', message: e.message });
 	}
 })
 app.use(express.static(path.join(distPath)));
