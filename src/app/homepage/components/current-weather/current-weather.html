@@ -8,11 +8,11 @@
     <div class="additional-info">
       <div class="info-element">
         <span class="title">Minima</span>
-        <span class="info">{{ daily().temp.min| unit: 'temp' }}</span>
+        <span class="info">{{ daily()?.temp?.min| unit: 'temp' }}</span>
       </div>
       <div class="info-element">
         <span class="title">Massima</span>
-        <span class="info">{{ daily().temp.max| unit: 'temp' }}</span>
+        <span class="info">{{ daily()?.temp?.max| unit: 'temp' }}</span>
       </div>
     </div>
     <div class="additional-info">

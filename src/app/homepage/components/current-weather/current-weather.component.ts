@@ -14,7 +14,7 @@ import { WeatherIconPipe } from '@kmd/shared/pipes/weather-icon-pipe';
 })
 export class CurrentWeatherComponent {
   currentWeather = input.required<CurrentWeatherInfo | undefined>();
-  daily = input.required<DailyWeatherInfo>();
+  daily = input.required<DailyWeatherInfo | undefined>();
   readonly now = new Date();
   locality = input.required<string>();
   weatherImage = computed(() => {
