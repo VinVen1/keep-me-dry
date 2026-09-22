@@ -1,41 +1,48 @@
-  <div class="main-info">
-    @let current = currentWeather();
-    <div class="left">
+<div class="main-info">
+  @let current = currentWeather();
+  <div class="left">
+    <div class="locality">
       <h2 class="city">{{ locality() }}</h2>
-      <div class="additional-info">
-        <div class="info-element">
-          <span class="title">Percepita</span>
-          <span class="info">{{current?.feels_like |  unit: 'temp'}}</span>
-        </div>
-
-        <div class="info-element">
-          <span class="title">Umidità</span>
-          <span class="info">{{current?.humidity}}</span>
-        </div>
+      <span class="date">{{ now | date: 'EEEE, d MMMM - HH:mm' |titlecase}}</span>
+    </div>
+    <div class="additional-info">
+      <div class="info-element">
+        <span class="title">Minima</span>
+        <span class="info">{{ daily().temp.min| unit: 'temp' }}</span>
       </div>
-      <div class="additional-info">
-        <div class="info-element">
-          <span class="title">Vento</span>
-          <span class="info">{{current?.wind_speed | unit: 'speed'}}</span>
-        </div>
-
-        <div class="info-element">
-          <span class="title">Indice UV</span>
-          <span class="info">{{current?.uvi}}</span>
-        </div>
+      <div class="info-element">
+        <span class="title">Massima</span>
+        <span class="info">{{ daily().temp.max| unit: 'temp' }}</span>
       </div>
     </div>
+    <div class="additional-info">
+      <div class="info-element">
+        <span class="title">Umidità</span>
+        <span class="info">{{ current?.humidity }} %</span>
+      </div>
+      <div class="info-element">
+        <span class="title">Vento</span>
+        <span class="info">{{ current?.wind_speed | unit: 'speed' }}</span>
+      </div>
 
-    <div>
-      @if (currentWeather()) {
-        <div class="weather">
-          <div class="weather-img">
-            <img [ngSrc]="currentWeather()?.weather?.[0]?.icon | weatherIcon" [priority]="0" fill alt="Pioggia">
-          </div>
-          <span class="main-temp">{{ current?.temp | unit: 'temp' }}</span>
-        </div>
-      }
+      <div class="info-element">
+        <span class="title">Indice UV</span>
+        <span class="info">{{ current?.uvi }}</span>
+      </div>
     </div>
   </div>
+
+  <div>
+    @if (currentWeather()) {
+      <div class="weather">
+        <div class="weather-img">
+          <img [ngSrc]="currentWeather()?.weather?.[0]?.icon | weatherIcon" [priority]="0" fill alt="Pioggia">
+        </div>
+        <span class="main-temp">{{ current?.temp | unit: 'temp' }}</span>
+        <span class="weather-text">{{ currentWeather()?.weather?.[0]?.description | titlecase }}</span>
+      </div>
+    }
+  </div>
+</div>
 
 

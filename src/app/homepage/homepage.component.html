@@ -6,7 +6,7 @@
                   (onLangSwitch)="changeLang($event)"
   ></kmd-search-bar>
   <kmd-card>
-    <kmd-current-weather [locality]="currentLocality()" [currentWeather]="current()"></kmd-current-weather>
+    <kmd-current-weather [locality]="currentLocality()" [currentWeather]="current()" [daily]="forecast()[0]"></kmd-current-weather>
     <kmd-hourly-weather [hourlyData]="hourly()"></kmd-hourly-weather>
   </kmd-card>
   <kmd-card>

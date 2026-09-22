@@ -3,8 +3,13 @@
   justify-content: space-between;
   align-items: center;
 
-  .city {
+
+  .locality {
     margin: 0 0 10px;
+    .date {
+      font-size: 20px;
+      font-weight: 600;
+    }
   }
 
   .weather {
@@ -14,8 +19,8 @@
 
     .weather-img {
       position: relative;
-      width: 128px;
-      height: 128px;
+      width: 96px;
+      height: 96px;
       margin: 10px 0;
 
       img {
@@ -24,17 +29,20 @@
     }
 
     .main-temp {
-      font-size: 72px;
+      font-size: 48px;
+    }
+
+    .weather-text {
+      font-size: 32px;
+      font-weight: bold;
     }
 
   }
 }
 
 .additional-info {
-  display: flex;
-  .info-element {
-    flex-grow: 1;
-  }
+ display: flex;
+  gap: 10px;
 }
 
 
