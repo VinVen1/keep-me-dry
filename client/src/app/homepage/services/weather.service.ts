@@ -47,7 +47,7 @@ export class WeatherService {
   );
   readonly daily = computed(
     () =>
-      (this._weatherState().daily?.map(this.normalizeRainData).slice(0, 5) as DailyWeatherInfo[]) ??
+      (this._weatherState().daily?.map(this.normalizeRainData).slice(1, 6) as DailyWeatherInfo[]) ??
       [],
   );
   readonly alerts = computed(() => this._weatherState().alerts ?? []);

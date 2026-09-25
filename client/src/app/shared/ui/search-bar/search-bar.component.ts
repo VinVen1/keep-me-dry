@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Geolocation, Language } from '@kmd/shared/interfaces';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -39,19 +39,26 @@ export class SearchBarComponent implements OnInit {
 
   private listenSearchChanges() {
     this.searchControl.valueChanges
-      .pipe(distinctUntilChanged(), debounceTime(300), takeUntilDestroyed(this._destroyRef))
-      .subscribe((value: string | null) => {
+      .pipe(
+        debounceTime(300),
+        map((value) => value?.trim().toLowerCase()),
+        distinctUntilChanged(),
+        takeUntilDestroyed(this._destroyRef),
+      )
+      .subscribe((value: string | undefined) => {
+        console.log('changed', value);
         this.onLocalitySearch.emit(value ?? '');
         this.showResults.set(true);
       });
   }
 
   selectLocality(locality: Geolocation) {
+    this.showResults.set(false);
     this.onLocalitySelect.emit(locality);
     this.searchControl.setValue(
       locality.local_names ? locality.local_names[this.currentLang] : locality.name,
+      { emitEvent: false },
     );
-    this.showResults.set(false);
   }
 
   clearSearch() {
