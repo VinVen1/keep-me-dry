@@ -1,41 +1,49 @@
 .search-bar {
-  margin:  20px;
-  padding: 10px;
-  border-radius: 15px;
-  display: grid;
-  align-items: center;
+  margin:  1.25rem;
+  padding: .625rem;
+  border-radius: .937rem;
+  display: flex;
+  justify-content: center;
   background: rgba(244, 250, 252, 0.8);
   box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
   -webkit-box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
   -moz-box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
 
   .search-input {
+    display: flex;
     position: relative;
     align-self: center;
     justify-self: center;
+    background: white;
+    border-radius: .5rem;
+    padding-right: 5rem;
+    z-index: 10;
+    min-width: 20rem;
+
       input {
-        z-index: 101;
+        flex: 1;
         position: relative;
-        font-size: 20px;
-        width: 600px;
+        font-size: 1.25rem;
       }
 
     .result-list {
       background: white;
       position: absolute;
-      top: 15px;
-      left: 10px;
+      top: 1rem;
       list-style-type: none;
-      border-radius: 0 0 8px 8px;
-      width: 600px;
-      z-index: 100;
-      padding: 10px;
+      border-radius: 0 0 .5rem .5rem;
+      width: calc(100% - 1.25rem);
+      padding: .625rem;
 
       li {
-        padding: 10px 10px;
+        padding: .625rem;
         border-top: 1px solid #bec1c1;
         text-decoration: none;
         cursor: pointer;
+
+        &:first-child {
+          border-top: 0;
+        }
         &:hover{
           background: #ebffff;
         }
@@ -44,15 +52,31 @@
 
     .icons {
       position: absolute;
-      right: 20px;
+      right: 1.25rem;
       top: 50%;
       transform: translateY(-50%);
       z-index: 101;
       display: flex;
-      gap: 10px;
+      gap: .625rem;
       i {
-        font-size: 24px;
+        font-size: 1.5rem;
       }
+    }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .search-bar {
+    .search-input {
+      min-width: 14rem;
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  .search-bar {
+    .search-input {
+      min-width: 10rem;
     }
   }
 }

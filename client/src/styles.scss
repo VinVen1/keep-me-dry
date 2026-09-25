@@ -20,6 +20,7 @@ html {
   background: #87ceeb;
   color: #2C2D2D;
   font-family: "Nunito", serif;
+  font-size: 16px;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -27,30 +28,30 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 2.25rem;
 }
 
 .info-element {
   display: flex;
   flex-direction: column;
-  margin: 5px 10px;
+  margin: .312rem .625rem;
 
   .title {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
   }
 
   .info {
-    font-size: 20px
+    font-size: 1.25rem
   }
 }
 
 
 input{
-  padding: 10px;
-  margin: 0 10px;
+  padding: .625rem;
+  margin: 0 .625rem;
   border: none;
-  border-radius: 8px;
+  border-radius: .5rem;
 
   &:focus {
     outline: none;
@@ -62,4 +63,10 @@ button {
   background: none;
   outline: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  html{
+    font-size: 14px;
+  }
 }

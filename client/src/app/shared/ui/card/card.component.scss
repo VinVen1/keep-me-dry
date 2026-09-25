@@ -1,10 +1,17 @@
 .card{
-  margin: 20px;
-  padding: 20px 40px;
+  margin: 1.25rem;
+  padding: 1.25rem 2.5rem;
   background: rgba(244, 250, 252, 0.8);
-  border-radius: 15px;
+  border-radius: .937rem;
   box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
   -webkit-box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
   -moz-box-shadow: -2px 3px 5px 1px rgba(58,103,115,0.69);
   position: relative;
+}
+
+@media screen and (max-width: 600px){
+  .card{
+    margin: 1rem;
+    padding: 1rem 1.5rem;
+  }
 }

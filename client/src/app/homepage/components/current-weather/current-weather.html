@@ -34,7 +34,6 @@
     </div>
   </div>
 
-  <div>
     @if (currentWeather()) {
       <div class="weather">
         <div class="weather-img">
@@ -45,11 +44,12 @@
             alt="Pioggia"
           />
         </div>
-        <span class="main-temp">{{ $safeNavigationMigration(current?.temp) | unit: 'temp' }}</span>
-        <span class="weather-text">{{
-          $safeNavigationMigration(currentWeather()?.weather?.[0]?.description) | titlecase
-        }}</span>
+        <div class="weather-info">
+          <span class="main-temp">{{ $safeNavigationMigration(current?.temp) | unit: 'temp' }}</span>
+          <span class="weather-text">{{
+              $safeNavigationMigration(currentWeather()?.weather?.[0]?.description) | titlecase
+            }}</span>
+        </div>
       </div>
     }
-  </div>
 </div>
