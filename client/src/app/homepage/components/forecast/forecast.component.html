@@ -3,23 +3,26 @@
       <div class="forecast-col">
         <div class="forecast-date">
           <h5 class="day">{{day.dt * 1000 | date:'dd'}}</h5>
-          <p class="date">{{day.dt * 1000| date: 'MMM yyyy'}}</p>
+          <p class="date">{{day.dt * 1000| date: 'MMMM yyyy'}}</p>
         </div>
-        <div class="forecast-row">
+        <div class="forecast-row img">
           <div class="weather-img">
             <img [ngSrc]="day.weather[0].icon | weatherIcon" fill priority="1" [alt]="'sunny'">
           </div>
         </div>
-        <div class="forecast-row">
-          <span>{{day.temp.day | unit: 'temp' : 0}}</span>
+        <div class="forecast-row temp">
+          <span>{{day.temp.min | unit: 'temp' : 0}} / {{day.temp.max | unit: 'temp' : 0}}</span>
         </div>
-        <div class="forecast-row">
+        <div class="forecast-row humidity">
+          <span class="title">Umidità</span>
           <span>{{day.humidity}} %</span>
         </div>
-        <div class="forecast-row">
+        <div class="forecast-row uvi">
+          <span class="title">Indice UV</span>
           <span>{{day.uvi}}</span>
         </div>
-        <div class="forecast-row">
+        <div class="forecast-row wind">
+          <span class="title">Vento</span>
           <span>{{day.wind_speed | unit: 'speed'}}</span>
         </div>
       </div>

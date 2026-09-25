@@ -1,4 +1,4 @@
-.weather-img{
+.weather-img {
   position: relative;
   width: 4rem;
   height: 4rem;
@@ -6,42 +6,120 @@
 }
 
 
-  .forecast-container{
+.forecast-container {
+  display: flex;
+  justify-content: space-around;
+
+  .forecast-col {
+    padding: 0 1.25rem;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
 
-    .forecast-col{
-      padding: 0 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
+    &:not(:last-child) {
+      border-width: 0 .062rem 0 0;
+      border-style: solid;
+      border-color: #bec1c1;
+    }
 
-      &:not(:last-child){
-        border-width: 0 .062rem 0 0;
-        border-style: solid;
-        border-color: #bec1c1;
+    .forecast-date {
+      margin-bottom: 1.25rem;
+
+      .day {
+        font-size: 1.75rem;
+        text-align: center;
       }
 
-      .forecast-date{
-        margin-bottom: 1.25rem;
-        .day {
-          font-size: 1.75rem;
-          text-align: center;
-        }
-        .date {
-          margin: 0;
-          text-align: center;
-        }
+      .date {
+        margin: 0;
+        text-align: center;
       }
+    }
 
-      .forecast-row {
-        margin: .5rem 0;
-        span{
-          font-size: 1.25rem;
-        }
+    .forecast-row {
+      margin: .5rem 0;
+      .title{
+        display: none;
+      }
+      span {
+        font-size: 1.25rem;
       }
     }
   }
+}
 
+@media screen and (max-width: 600px) {
+  .weather-img {
+    width: 6rem;
+    height: 6rem;
+  }
+  .forecast-container {
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
 
+    .forecast-col {
+      scroll-snap-align: center;
+      display: grid;
+      grid-template-areas: "date date"
+      "img humidity"
+      "img uvi"
+      "temp wind";
+      flex: 0 0 100%;
+      padding: 0;
+      gap: 1rem;
+
+      &:not(:last-child) {
+        border: none;
+
+      }
+
+      .forecast-row{
+        margin: 0;
+        .title {
+          display: block;
+          font-weight: bold;
+          font-size: 1.25rem;
+        }
+      }
+
+      .forecast-date {
+        display: flex;
+        align-items: center;
+        grid-area: date;
+        gap: 0.625rem;
+        margin-bottom: 0;
+
+        .date {
+          font-size: 1.825rem;
+          font-weight: bold;
+        }
+      }
+
+      .img {
+        grid-area: img;
+        margin: 0;
+      }
+
+      .temp {
+        grid-area: temp;
+        span {
+          font-size: 2rem;
+          font-weight: bold;
+        }
+      }
+
+      .uvi {
+        grid-area: uvi;
+      }
+
+      .humidity {
+        grid-area: humidity;
+      }
+
+      .wind {
+        grid-area: wind;
+      }
+    }
+  }
+}
