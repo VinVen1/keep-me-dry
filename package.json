@@ -1,7 +1,7 @@
 {
   "name": "weather-app-monorepo",
   "description": "Angular 21 Weather App with Node.js Proxy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "cd client && npm install && ng build",
     "start:server": "cd server && npm install && npm start",
