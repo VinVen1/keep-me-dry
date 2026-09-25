@@ -3,7 +3,7 @@
     <input id="locality" [formControl]="searchControl" placeholder="Cerca località..." size="1">
     @if (localitiesList().length > 0 && showResults()) {
       <ul class="result-list">
-        @for (locality of localitiesList(); track locality.lat) {
+        @for (locality of localitiesList(); let i=$index; track locality.lat+locality.lon+i) {
           <li (click)="selectLocality(locality)">
             {{locality.name + ', ' + (locality.state ?? '') + ' ' + (locality.country ?? '') }}
           </li>
